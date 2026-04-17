@@ -1,0 +1,58 @@
+<html>
+<head>
+    <title>FDA Product Safety Checker</title>
+    <link rel="stylesheet" href="proj_style.css">
+</head>
+<body>
+
+    <header>
+        <h1>FDA Product Safety Checker</h1>
+        <nav>
+            <a href="#search-section">Search</a>
+            <a href="#recall-section">Recalls</a>
+            <a href="#event-section">Adverse Events</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Check what’s in your products</h2>
+            <p>
+                Search products and view FDA-backed information including ingredients,
+                warnings, recalls, and reported adverse events.
+            </p>
+        </section>
+
+        <section id="search-section" class="card">
+            <h2>Search a Product</h2>
+
+            <div class="search-container">
+                <input type="text" id="drugInput" placeholder="Type a product (ex: Tylenol)">
+                <div id="suggestions"></div>
+            </div>
+
+            <button id="searchBtn">Search</button>
+            <div id="results"></div>
+        </section>
+
+        <section id="recall-section" class="card">
+            <h2>Recent Food Recalls</h2>
+            <button id="loadRecallsBtn">Load Recent Recalls</button>
+            <div id="recallResults"></div>
+        </section>
+
+        <section id="event-section" class="card">
+            <h2>Reported Adverse Events</h2>
+            <input type="text" id="eventInput" placeholder="Enter product name (ex: Tylenol)">
+            <button id="eventBtn">Load Adverse Events</button>
+            <div id="eventResults"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>INST377 Final Project - openFDA API</p>
+    </footer>
+
+    <script src="proj_script.js"></script>
+</body>
+</html>

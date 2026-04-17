@@ -1,0 +1,114 @@
+body {
+    margin: 0;
+    background-color: #f4f6f8;
+    color: #222;
+}
+
+header {
+    background-color: #1f4e79;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+nav {
+    margin-top: 10px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 12px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    width: 90%;
+    max-width: 1000px;
+    margin: 30px auto;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+input {
+    padding: 10px;
+    width: 70%;
+    max-width: 400px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 16px;
+    background-color: #1f4e79;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+button:hover {
+    background-color: #163a59;
+}
+
+.result-box {
+    background-color: #f9fafb;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 8px;
+}
+
+.result-box h3 {
+    margin-top: 0;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #1f4e79;
+    color: white;
+    margin-top: 30px;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+.search-container {
+    position: relative;
+    max-width: 400px;
+}
+
+#suggestions {
+    position: absolute;
+    width: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    z-index: 10;
+    display: none;
+}
+
+.suggestion-item {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.suggestion-item:hover {
+    background-color: #eee;
+}
