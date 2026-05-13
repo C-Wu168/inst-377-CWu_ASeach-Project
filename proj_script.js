@@ -4,6 +4,18 @@ const eventBtn = document.getElementById("eventBtn");
 const input = document.getElementById("drugInput");
 const suggestionsBox = document.getElementById("suggestions");
 
+if (searchBtn) {
+    searchBtn.addEventListener("click", getDrugInfo);
+}
+
+if (loadRecallsBtn) {
+    loadRecallsBtn.addEventListener("click", loadRecalls);
+}
+
+if (eventBtn) {
+    eventBtn.addEventListener("click", loadAdverseEvents);
+}
+
 
 input.addEventListener("input", showSuggestions);
 

@@ -1,0 +1,45 @@
+<html>
+<head>
+    <title>Product Search</title>
+    <link rel="stylesheet" href="proj_style.css">
+</head>
+<body>
+
+    <header>
+        <h1>FDA Product Safety Checker</h1>
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="search.html">Search</a>
+            <a href="recalls.html">Recalls</a>
+            <a href="adverse.html">Adverse Events</a>
+            <a href="profile.html">My Account</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Search FDA Products</h2>
+            <p>
+                Look up any product to view FDA-backed information including ingredients,
+                warnings, recalls, and reported adverse events.
+            </p>
+        </section>
+
+        <section id="search-section" class="card">
+            <h2>Search a Product</h2>
+            <div class="search-container">
+                <input type="text" id="drugInput" placeholder="Type a product (ex: Tylenol)">
+                <div id="suggestions"></div>
+            </div>
+            <button id="searchBtn">Search</button>
+            <div id="results"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>INST377 Final Project - openFDA API</p>
+    </footer>
+
+    <script src="proj_script.js"></script>
+</body>
+</html>

@@ -8,44 +8,46 @@
     <header>
         <h1>FDA Product Safety Checker</h1>
         <nav>
-            <a href="#search-section">Search</a>
-            <a href="#recall-section">Recalls</a>
-            <a href="#event-section">Adverse Events</a>
+            <a href="index.html">Home</a>
+            <a href="search.html">Search</a>
+            <a href="recalls.html">Recalls</a>
+            <a href="adverse.html">Adverse Events</a>
+            <a href="profile.html">My Account</a>
         </nav>
     </header>
 
     <main>
         <section class="hero">
-            <h2>Check what’s in your products</h2>
-            <p>
-                Search products and view FDA-backed information including ingredients,
-                warnings, recalls, and reported adverse events.
-            </p>
+            <h2>Welcome to FDA Product Safety Checker</h2>
+            <p>Search products, track recalls, and stay informed about adverse events — all powered by the openFDA database.</p>
         </section>
 
-        <section id="search-section" class="card">
-            <h2>Search a Product</h2>
-
-            <div class="search-container">
-                <input type="text" id="drugInput" placeholder="Type a product (ex: Tylenol)">
-                <div id="suggestions"></div>
+        <section class="card" id="recent-searches-section">
+            <h2>Recently Searched</h2>
+            <div id="recentSearches">
+                <p class="empty-state">No recent searches yet. <a href="search.html">Search a product</a> to get started.</p>
             </div>
-
-            <button id="searchBtn">Search</button>
-            <div id="results"></div>
         </section>
 
-        <section id="recall-section" class="card">
-            <h2>Recent Food Recalls</h2>
-            <button id="loadRecallsBtn">Load Recent Recalls</button>
-            <div id="recallResults"></div>
-        </section>
-
-        <section id="event-section" class="card">
-            <h2>Reported Adverse Events</h2>
-            <input type="text" id="eventInput" placeholder="Enter product name (ex: Tylenol)">
-            <button id="eventBtn">Load Adverse Events</button>
-            <div id="eventResults"></div>
+        <section class="card" id="quick-links-section">
+            <h2>Explore</h2>
+            <div class="quick-links">
+                <a href="search.html" class="quick-link-card">
+                    <span class="icon">🔍</span>
+                    <h3>Product Search</h3>
+                    <p>Look up ingredients, warnings, and more for any FDA-listed product.</p>
+                </a>
+                <a href="recalls.html" class="quick-link-card">
+                    <span class="icon">⚠️</span>
+                    <h3>Recent Recalls</h3>
+                    <p>Browse the latest FDA food and drug recall announcements.</p>
+                </a>
+                <a href="adverse.html" class="quick-link-card">
+                    <span class="icon">📋</span>
+                    <h3>Adverse Events</h3>
+                    <p>Search reported adverse events and side effects by product name.</p>
+                </a>
+            </div>
         </section>
     </main>
 
