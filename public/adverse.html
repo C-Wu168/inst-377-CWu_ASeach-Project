@@ -12,6 +12,7 @@
                 <a href="search.html">Search</a>
                 <a href="recalls.html">Recalls</a>
                 <a href="adverse.html">Adverse Events</a>
+                <a href="about.html">About</a>
                 <a href="profile.html">My Account</a>
             </nav>
         </header>
@@ -27,8 +28,10 @@
 
             <section id="event-section" class="card">
                 <h2>Reported Adverse Events</h2>
-                <input type="text" id="eventInput" placeholder="Enter product name (ex: Tylenol)">
-                <br>
+                <div class="search-container">
+                    <input type="text" id="eventInput" placeholder="Enter product name (ex: Tylenol)">
+                    <div id="eventSuggestions"></div>
+                </div>
                 <button id="eventBtn">Load Adverse Events</button>
                 <div id="eventResults"></div>
             </section>
