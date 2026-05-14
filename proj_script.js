@@ -17,14 +17,37 @@ if (eventBtn) {
 }
 
 
-input.addEventListener("input", showSuggestions);
+if (input && suggestionsBox) {
+    input.addEventListener("input", () => showSuggestions(input, suggestionsBox));
 
-function showSuggestions() {
-    const query = input.value.trim();
+    document.addEventListener("click", (e) => {
+        if (!e.target.closest(".search-container")) {
+            suggestionsBox.innerHTML = "";
+            suggestionsBox.style.display = "none";
+        }
+    });
+}
+
+const eventInput = document.getElementById("eventInput");
+const eventSuggestions = document.getElementById("eventSuggestions");
+
+if (eventInput && eventSuggestions) {
+    eventInput.addEventListener("input", () => showSuggestions(eventInput, eventSuggestions));
+
+    document.addEventListener("click", (e) => {
+        if (!e.target.closest(".search-container")) {
+            eventSuggestions.innerHTML = "";
+            eventSuggestions.style.display = "none";
+        }
+    });
+}
+
+function showSuggestions(targetInput, targetBox) {
+    const query = targetInput.value.trim();
 
     if (query.length < 2) {
-        suggestionsBox.innerHTML = "";
-        suggestionsBox.style.display = "none";
+        targetBox.innerHTML = "";
+        targetBox.style.display = "none";
         return;
     }
 
@@ -39,8 +62,8 @@ function showSuggestions() {
             const seen = new Set();
 
             if (!data.results) {
-                suggestionsBox.innerHTML = "";
-                suggestionsBox.style.display = "none";
+                targetBox.innerHTML = "";
+                targetBox.style.display = "none";
                 return;
             }
 
@@ -54,30 +77,30 @@ function showSuggestions() {
             });
 
             if (output === "") {
-                suggestionsBox.innerHTML = "";
-                suggestionsBox.style.display = "none";
+                targetBox.innerHTML = "";
+                targetBox.style.display = "none";
                 return;
             }
 
-            suggestionsBox.innerHTML = output;
-            suggestionsBox.style.display = "block";
+            targetBox.innerHTML = output;
+            targetBox.style.display = "block";
 
             document.querySelectorAll(".suggestion-item").forEach((item) => {
                 item.addEventListener("click", () => {
-                    input.value = item.textContent;
-                    suggestionsBox.innerHTML = "";
-                    suggestionsBox.style.display = "none";
+                    targetInput.value = item.textContent;
+                    targetBox.innerHTML = "";
+                    targetBox.style.display = "none";
                 });
             });
         })
         .catch((error) => {
             console.error("FETCH ERROR:", error);
-            suggestionsBox.innerHTML = "";
-            suggestionsBox.style.display = "none";
+            targetBox.innerHTML = "";
+            targetBox.style.display = "none";
         });
 }
 
-searchBtn.addEventListener("click", getDrugInfo);
+// searchBtn.addEventListener("click", getDrugInfo);
 
 function getDrugInfo() {
     const drugName = document.getElementById("drugInput").value.trim();
