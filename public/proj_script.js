@@ -51,7 +51,7 @@ function showSuggestions(targetInput, targetBox) {
         return;
     }
 
-    const url = `https://api.fda.gov/drug/label.json?search=openfda.brand_name:${query}*&limit=5`;
+    const url = `/api/suggestions/${encodeURIComponent(query)}`;
 
     fetch(url)
         .then((response) => response.json())
@@ -100,8 +100,6 @@ function showSuggestions(targetInput, targetBox) {
         });
 }
 
-// searchBtn.addEventListener("click", getDrugInfo);
-
 function getDrugInfo() {
     const drugName = document.getElementById("drugInput").value.trim();
     const resultsDiv = document.getElementById("results");
@@ -111,7 +109,13 @@ function getDrugInfo() {
         return;
     }
 
-    const url = `https://api.fda.gov/drug/label.json?search=openfda.brand_name:"${drugName}"&limit=1`;
+    fetch('/api/searches', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ drug_name: drugName })
+    });
+
+    const url = `/api/drug/${encodeURIComponent(drugName)}`;
 
     fetch(url)
         .then((response) => {
@@ -145,12 +149,9 @@ function getDrugInfo() {
         });
 }
 
-
-loadRecallsBtn.addEventListener("click", loadRecalls);
-
 function loadRecalls() {
     const recallDiv = document.getElementById("recallResults");
-    const url = "https://api.fda.gov/food/enforcement.json?limit=5&sort=report_date:desc";
+    const url = "/api/recalls";
 
     fetch(url)
         .then((response) => {
@@ -183,9 +184,6 @@ function loadRecalls() {
         });
 }
 
-
-eventBtn.addEventListener("click", loadAdverseEvents);
-
 function loadAdverseEvents() {
     const productName = document.getElementById("eventInput").value.trim();
     const eventDiv = document.getElementById("eventResults");
@@ -195,7 +193,7 @@ function loadAdverseEvents() {
         return;
     }
 
-    const url = `https://api.fda.gov/drug/event.json?search=patient.drug.medicinalproduct:"${productName}"&count=patient.reaction.reactionmeddrapt.exact`;
+    const url = `/api/events/${encodeURIComponent(productName)}`;
 
     fetch(url)
         .then((response) => {
@@ -230,3 +228,24 @@ function loadAdverseEvents() {
         });
 }
 
+function loadRecentSearches() {
+    const container = document.getElementById("recentSearches");
+    if (!container) return;
+
+    fetch('/api/searches')
+        .then(res => res.json())
+        .then(data => {
+            if (!data || data.length === 0) {
+                container.innerHTML = `<p class="empty-state">No recent searches yet. <br><a href="search.html">Search a product</a> to get started.</p>`;
+                return;
+            }
+            container.innerHTML = data
+                .map(row => `<a href="search.html?q=${encodeURIComponent(row.drug_name)}" class="recent-search-tag">${row.drug_name}</a>`)
+                .join("");
+        })
+        .catch(() => {
+            container.innerHTML = `<p>Could not load recent searches.</p>`;
+        });
+}
+
+loadRecentSearches();

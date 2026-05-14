@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/C-Wu168/inst-377-CWu_ASeach-Project#readme",
   "dependencies": {
+    "@supabase/supabase-js": "^2.105.4",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "node-fetch": "^2.7.0"

@@ -2,6 +2,10 @@ const express = require('express');
 const fetch = require('node-fetch');
 require('dotenv').config();
 
+const { createClient } = require('@supabase/supabase-js');
+
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -36,6 +40,30 @@ app.get('/api/suggestions/:query', async (req, res) => {
     const url = `https://api.fda.gov/drug/label.json?search=openfda.brand_name:${query}*&limit=5`;
     const response = await fetch(url);
     const data = await response.json();
+    res.json(data);
+});
+
+app.get('/api/searches', async (req, res) => {
+    const { data, error } = await supabase
+        .from('searches')
+        .select('*')
+        .order('searched_at', { ascending: false })
+        .limit(5);
+
+    if (error) return res.status(500).json({ error: error.message });
+    res.json(data);
+});
+
+app.post('/api/searches', async (req, res) => {
+    const { drug_name } = req.body;
+
+    if (!drug_name) return res.status(400).json({ error: 'drug_name is required' });
+
+    const { data, error } = await supabase
+        .from('searches')
+        .insert([{ drug_name }]);
+
+    if (error) return res.status(500).json({ error: error.message });
     res.json(data);
 });
 
