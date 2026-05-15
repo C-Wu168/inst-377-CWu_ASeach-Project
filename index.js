@@ -53,10 +53,19 @@ app.get('/api/searches', async (req, res) => {
         .from('searches')
         .select('*')
         .order('searched_at', { ascending: false })
-        .limit(5);
+        .limit(50);
 
     if (error) return res.status(500).json({ error: error.message });
-    res.json(data);
+
+    const seen = new Set();
+    const unique = data.filter(row => {
+        const name = row.drug_name.toUpperCase();
+        if (seen.has(name)) return false;
+        seen.add(name);
+        return true;
+    }).slice(0, 5);
+
+    res.json(unique);
 });
 
 app.post('/api/searches', async (req, res) => {
