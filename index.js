@@ -14,10 +14,6 @@ app.use(express.static('public'));
 
 const path = require('path');
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'home.html'));
-});
-
 app.get('/api/drug/:name', async (req, res) => {
     const name = req.params.name;
     const url = `https://api.fda.gov/drug/label.json?search=openfda.brand_name:"${name}"&limit=1`;
