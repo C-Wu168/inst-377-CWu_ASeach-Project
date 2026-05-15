@@ -12,6 +12,12 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.static('public'));
 
+const path = require('path');
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'home.html'));
+});
+
 app.get('/api/drug/:name', async (req, res) => {
     const name = req.params.name;
     const url = `https://api.fda.gov/drug/label.json?search=openfda.brand_name:"${name}"&limit=1`;
@@ -67,6 +73,10 @@ app.post('/api/searches', async (req, res) => {
     res.json(data);
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`Server running on http://localhost:${PORT}`);
+    });
+}
+
+module.exports = app;
