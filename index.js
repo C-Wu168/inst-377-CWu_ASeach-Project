@@ -1,5 +1,6 @@
 const express = require('express');
 const fetch = require('node-fetch');
+const path = require('path');
 require('dotenv').config();
 
 const { createClient } = require('@supabase/supabase-js');
@@ -10,6 +11,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'home.html'));
+});
 
 app.get('/api/drug/:name', async (req, res) => {
     const name = req.params.name;
