@@ -119,11 +119,16 @@
                 return response.json();
             })
             .then((data) => {
+                if (!data.results || data.results.length === 0) {
+                    throw new Error("No product data found.");
+                }
+
                 fetch('/api/searches', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ drug_name: drugName })
                 });
+
                 const result = data.results[0];
 
                 const brand = result.openfda?.brand_name?.[0] || "N/A";
