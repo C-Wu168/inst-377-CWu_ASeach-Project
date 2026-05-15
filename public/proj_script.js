@@ -109,12 +109,6 @@
             return;
         }
 
-        fetch('/api/searches', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ drug_name: drugName })
-        });
-
         const url = `/api/drug/${encodeURIComponent(drugName)}`;
 
         await fetch(url)
@@ -125,6 +119,11 @@
                 return response.json();
             })
             .then((data) => {
+                fetch('/api/searches', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ drug_name: drugName })
+                });
                 const result = data.results[0];
 
                 const brand = result.openfda?.brand_name?.[0] || "N/A";
