@@ -251,12 +251,29 @@ function loadRecentSearches() {
 
     function renderSearches(data) {
         const container = document.getElementById("recentSearches");
-        container.innerHTML = data
-            .map(row => {
-                const time = new Date(row.searched_at).toLocaleString();
-                return `<a href="search.html?q=${encodeURIComponent(row.drug_name)}" class="recent-search-tag">${row.drug_name}<span class="search-time">${time}</span></a>`;
-            })
-            .join("");
+        container.innerHTML = `
+            <table class="recent-search-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${data.map(row => {
+                        const d = new Date(row.searched_at);
+                        const date = d.toLocaleDateString();
+                        const time = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                        return `
+                            <tr>
+                                <td><a href="search.html?q=${encodeURIComponent(row.drug_name)}">${row.drug_name}</a></td>
+                                <td>${date}</td>
+                                <td>${time}</td>
+                            </tr>`;
+                    }).join("")}
+                </tbody>
+            </table>`;
     }
 
     function sortSearches(type) {
