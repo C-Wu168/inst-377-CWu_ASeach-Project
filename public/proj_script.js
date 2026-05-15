@@ -228,24 +228,49 @@
             });
     }
 
-    function loadRecentSearches() {
-        const container = document.getElementById("recentSearches");
-        if (!container) return;
+let recentSearchData = [];
 
-        fetch('/api/searches')
-            .then(res => res.json())
-            .then(data => {
-                if (!data || data.length === 0) {
-                    container.innerHTML = `<p class="empty-state">No recent searches yet. <br><a href="search.html">Search a product</a> to get started.</p>`;
-                    return;
-                }
-                container.innerHTML = data
-                    .map(row => `<a href="search.html?q=${encodeURIComponent(row.drug_name)}" class="recent-search-tag">${row.drug_name}</a>`)
-                    .join("");
+function loadRecentSearches() {
+    const container = document.getElementById("recentSearches");
+    if (!container) return;
+
+    fetch('/api/searches')
+        .then(res => res.json())
+        .then(data => {
+            if (!data || data.length === 0) {
+                container.innerHTML = `<p class="empty-state">No recent searches yet. <br><a href="search.html">Search a product</a> to get started.</p>`;
+                return;
+            }
+            recentSearchData = data;
+            renderSearches(recentSearchData);
+        })
+        .catch(() => {
+            container.innerHTML = `<p>Could not load recent searches.</p>`;
+        });
+}
+
+    function renderSearches(data) {
+        const container = document.getElementById("recentSearches");
+        container.innerHTML = data
+            .map(row => {
+                const time = new Date(row.searched_at).toLocaleString();
+                return `<a href="search.html?q=${encodeURIComponent(row.drug_name)}" class="recent-search-tag">${row.drug_name}<span class="search-time">${time}</span></a>`;
             })
-            .catch(() => {
-                container.innerHTML = `<p>Could not load recent searches.</p>`;
-            });
+            .join("");
+    }
+
+    function sortSearches(type) {
+        let sorted = [...recentSearchData];
+        if (type === "newest") {
+            sorted.sort((a, b) => new Date(b.searched_at) - new Date(a.searched_at));
+        } else if (type === "oldest") {
+            sorted.sort((a, b) => new Date(a.searched_at) - new Date(b.searched_at));
+        } else if (type === "a-z") {
+            sorted.sort((a, b) => a.drug_name.localeCompare(b.drug_name));
+        } else if (type === "z-a") {
+            sorted.sort((a, b) => b.drug_name.localeCompare(a.drug_name));
+        }
+        renderSearches(sorted);
     }
 
     loadRecentSearches();

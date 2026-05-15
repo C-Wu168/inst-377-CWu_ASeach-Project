@@ -23,10 +23,14 @@
         </section>
 
         <section class="card" id="recent-searches-section">
-            <h2 >Recently Searched</h2>
-            <div id="recentSearches">
-                <p class="empty-state">No recent searches yet. <br><a href="search.html">Search a product</a> to get started.</p>
+            <h2>Recently Searched</h2>
+            <div class="sort-buttons">
+                <button onclick="sortSearches('newest')">Newest</button>
+                <button onclick="sortSearches('oldest')">Oldest</button>
+                <button onclick="sortSearches('a-z')">A–Z</button>
+                <button onclick="sortSearches('z-a')">Z–A</button>
             </div>
+            <div id="recentSearches">
         </section>
 
         <section class="card" id="quick-links-section">

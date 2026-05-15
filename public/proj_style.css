@@ -198,3 +198,32 @@ ul {
     text-align: center;
 }
 
+.sort-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.sort-buttons button {
+    padding: 6px 14px;
+    font-size: 13px;
+    background-color: white;
+    color: #1f4e79;
+    border: 1px solid #1f4e79;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.sort-buttons button:hover {
+    background-color: #1f4e79;
+    color: white;
+}
+
+.search-time {
+    display: block;
+    font-size: 11px;
+    opacity: 0.8;
+    margin-top: 4px;
+}
