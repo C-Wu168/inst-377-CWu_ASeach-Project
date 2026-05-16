@@ -126,5 +126,156 @@ ul {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+#recentSearches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+}
 
+.empty-state {
+    color: #666;
+    font-size: 14px;
+}
 
+.quick-links {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.quick-link-card {
+    display: block;
+    background-color: #1f4e79;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 20px;
+    flex: 1;
+    min-width: 200px;
+    max-width: 280px;
+    text-align: center;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.quick-link-card:hover {
+    background-color: #163a59;
+    transform: translateY(-2px);
+}
+
+.quick-link-card h3 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+}
+
+.quick-link-card p {
+    margin: 0;
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+#recent-searches-section,
+#quick-links-section {
+    text-align: center;
+}
+
+.sort-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.sort-buttons button {
+    padding: 6px 14px;
+    font-size: 13px;
+    background-color: white;
+    color: #1f4e79;
+    border: 1px solid #1f4e79;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.sort-buttons button:hover {
+    background-color: #1f4e79;
+    color: white;
+}
+
+.recent-search-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.recent-search-table th {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 2px solid #1f4e79;
+    color: #1f4e79;
+    font-size: 14px;
+}
+
+.recent-search-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.recent-search-table tr:hover {
+    background-color: #f0f4f8;
+}
+
+.recent-search-table a {
+    color: #1f4e79;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.recent-search-table a:hover {
+    text-decoration: underline;
+}
+
+.tippy-box[data-theme~='drug-preview'] {
+    background-color: #fff;
+    color: #222;
+    border: 1px solid #1f4e79;
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+    font-size: 13px;
+    max-width: 260px;
+}
+
+.tippy-box[data-theme~='drug-preview'] .tippy-arrow {
+    color: #1f4e79;
+}
+
+.tippy-drug-box {
+    padding: 10px 12px;
+    line-height: 1.5;
+}
+
+.tippy-drug-box strong {
+    display: block;
+    font-size: 14px;
+    color: #1f4e79;
+    margin-bottom: 4px;
+}
+
+.tippy-drug-box hr {
+    border: none;
+    border-top: 1px solid #e0e7ef;
+    margin: 6px 0;
+}
+
+.tippy-drug-box p {
+    margin: 4px 0;
+}
+
+.tippy-drug-box span {
+    font-weight: 600;
+    color: #555;
+}

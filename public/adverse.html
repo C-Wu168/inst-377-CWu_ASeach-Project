@@ -1,47 +1,45 @@
-    <html>
-    <head>
-        <title>Recent Adverse Events</title>
-        <link rel="stylesheet" href="proj_style.css">
-    </head>
-    <body>
+<html>
+<head>
+    <title>Recent Adverse Events</title>
+    <link rel="stylesheet" href="proj_style.css">
+</head>
+<body>
 
-        <header>
-            <h1>FDA Double Check</h1>
-            <nav>
-                <a href="home.html">Home</a>
-                <a href="search.html">Search</a>
-                <a href="recalls.html">Recalls</a>
-                <a href="adverse.html">Adverse Events</a>
-                <a href="about.html">About</a>
-            </nav>
-        </header>
+    <header>
+        <h1>FDA Double Check</h1>
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="search.html">Search</a>
+            <a href="recalls.html">Recalls</a>
+            <a href="adverse.html">Adverse Events</a>
+            <a href="about.html">About</a>
+        </nav>
+    </header>
 
-        <main>
-            <section class="hero">
-                <h2>Reported Adverse Events</h2>
-                <p>
-                    Search FDA-reported adverse events for any product to understand
-                    potential risks and side effects.
-                </p>
-            </section>
+    <main>
+        <section class="hero">
+            <h2>Reported Adverse Events</h2>
+            <p>
+                Search FDA-reported adverse events for any product to understand
+                potential risks and side effects.
+            </p>
+        </section>
 
-            <section id="event-section" class="card">
-                <h2>Reported Adverse Events</h2>
-                <div class="search-container">
-                    <input type="text" id="eventInput" placeholder="Enter product name (ex: Tylenol)">
-                    <div id="eventSuggestions"></div>
-                </div>
-                <button id="eventBtn">Load Adverse Events</button>
-                <div id="eventResults"></div>
-            </section>
-        </main>
+        <section id="event-section" class="card">
+            <h2>Reported Adverse Events</h2>
+            <div class="search-container">
+                <input type="text" id="eventInput" placeholder="Enter product name (ex: Tylenol)">
+                <div id="eventSuggestions"></div>
+            </div>
+            <button id="eventBtn">Load Adverse Events</button>
+            <div id="eventResults"></div>
+        </section>
+    </main>
 
-        <footer>
-            <p>INST377 Final Project - openFDA API</p>
-        </footer>
+    <footer>
+        <p>INST377 Final Project - openFDA API</p>
+    </footer>
 
         <script src="proj_script.js"></script>
-        <script src="https://cdn.jsdelivr.net/gh/iamashruu/cursorly.js@latest/dist/cursorly.min.js"></script>
-
     </body>
     </html>

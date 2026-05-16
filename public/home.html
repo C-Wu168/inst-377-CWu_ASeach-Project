@@ -2,11 +2,14 @@
 <head>
     <title>FDA Double Check</title>
     <link rel="stylesheet" href="proj_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tippy.js/6.3.7/tippy.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tippy.js/6.3.7/tippy.umd.min.js"></script>
 </head>
 <body>
 
     <header>
-        <h1>FDA Product Safety Checker</h1>
+        <h1>FDA Double Check</h1>
         <nav>
             <a href="home.html">Home</a>
             <a href="search.html">Search</a>
@@ -22,14 +25,18 @@
             <p>Search products, track recalls, and stay informed about adverse events — all powered by the openFDA database.</p>
         </section>
 
-        <section class="card" id="recent-searches-section" style = "border: 2px solid #1f4e79; text-align: center;">
-            <h2 >Recently Searched</h2>
-            <div id="recentSearches">
-                <p class="empty-state">No recent searches yet. <br><a href="search.html">Search a product</a> to get started.</p>
+        <section class="card" id="recent-searches-section">
+            <h2>Recently Searched</h2>
+            <div class="sort-buttons">
+                <button onclick="sortSearches('newest')">Newest</button>
+                <button onclick="sortSearches('oldest')">Oldest</button>
+                <button onclick="sortSearches('a-z')">A–Z</button>
+                <button onclick="sortSearches('z-a')">Z–A</button>
             </div>
+            <div id="recentSearches">
         </section>
 
-        <section class="card" id="quick-links-section" style = "border: 2px solid #1f4e79; text-align: center;">
+        <section class="card" id="quick-links-section">
             <h2>Explore</h2>
             <div class="quick-links">
                 <a href="search.html" class="quick-link-card">
