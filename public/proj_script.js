@@ -253,32 +253,77 @@ function loadRecentSearches() {
         });
 }
 
-    function renderSearches(data) {
-        const container = document.getElementById("recentSearches");
-        container.innerHTML = `
-            <table class="recent-search-table">
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${data.map(row => {
-                        const d = new Date(row.searched_at);
-                        const date = d.toLocaleDateString();
-                        const time = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                        return `
-                            <tr>
-                                <td><a href="search.html?q=${encodeURIComponent(row.drug_name)}">${row.drug_name}</a></td>
-                                <td>${date}</td>
-                                <td>${time}</td>
-                            </tr>`;
-                    }).join("")}
-                </tbody>
-            </table>`;
+function renderSearches(data) {
+    const container = document.getElementById("recentSearches");
+    container.innerHTML = `
+        <table class="recent-search-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${data.map(row => {
+                    const d = new Date(row.searched_at);
+                    const date = d.toLocaleDateString();
+                    const time = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    return `
+                        <tr>
+                            <td><a class="drug-preview-link" data-drug="${row.drug_name}" href="search.html?q=${encodeURIComponent(row.drug_name)}">${row.drug_name}</a></td>
+                            <td>${date}</td>
+                            <td>${time}</td>
+                        </tr>`;
+                }).join("")}
+            </tbody>
+        </table>`;
+
+    if (typeof tippy !== "undefined") {
+        document.querySelectorAll(".drug-preview-link").forEach(link => {
+            tippy(link, {
+                content: "Loading...",
+                allowHTML: true,
+                placement: "right",
+                theme: "drug-preview",
+                delay: [200, 0],
+                onShow(instance) {
+                    if (instance._fetched) return;
+                    instance._fetched = true;
+
+                    const drugName = instance.reference.dataset.drug;
+
+                    fetch(`/api/drug/${encodeURIComponent(drugName)}`)
+                        .then(res => res.json())
+                        .then(data => {
+                            if (!data.results || data.results.length === 0) {
+                                instance.setContent(`<div class="tippy-drug-box"><em>No data found.</em></div>`);
+                                return;
+                            }
+                            const r = data.results[0];
+                            const generic = r.openfda?.generic_name?.[0] || "N/A";
+                            const purpose = r.purpose?.[0] || "N/A";
+                            const active = r.active_ingredient?.[0] || "N/A";
+                            const truncate = (str, n) => str.length > n ? str.slice(0, n) + "..." : str;
+
+                            instance.setContent(`
+                                <div class="tippy-drug-box">
+                                    <strong>${drugName}</strong>
+                                    <hr>
+                                    <p><span>Generic:</span> ${truncate(generic, 40)}</p>
+                                    <p><span>Purpose:</span> ${truncate(purpose, 60)}</p>
+                                    <p><span>Active Ingredient:</span> ${truncate(active, 60)}</p>
+                                </div>
+                            `);
+                        })
+                        .catch(() => {
+                            instance.setContent(`<div class="tippy-drug-box"><em>Could not load data.</em></div>`);
+                        });
+                }
+            });
+        });
     }
+}
 
     function sortSearches(type) {
         let sorted = [...recentSearchData];

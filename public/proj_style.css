@@ -238,3 +238,44 @@ ul {
 .recent-search-table a:hover {
     text-decoration: underline;
 }
+
+.tippy-box[data-theme~='drug-preview'] {
+    background-color: #fff;
+    color: #222;
+    border: 1px solid #1f4e79;
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+    font-size: 13px;
+    max-width: 260px;
+}
+
+.tippy-box[data-theme~='drug-preview'] .tippy-arrow {
+    color: #1f4e79;
+}
+
+.tippy-drug-box {
+    padding: 10px 12px;
+    line-height: 1.5;
+}
+
+.tippy-drug-box strong {
+    display: block;
+    font-size: 14px;
+    color: #1f4e79;
+    margin-bottom: 4px;
+}
+
+.tippy-drug-box hr {
+    border: none;
+    border-top: 1px solid #e0e7ef;
+    margin: 6px 0;
+}
+
+.tippy-drug-box p {
+    margin: 4px 0;
+}
+
+.tippy-drug-box span {
+    font-weight: 600;
+    color: #555;
+}
