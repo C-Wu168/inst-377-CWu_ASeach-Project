@@ -188,9 +188,13 @@
             });
     }
 
+    let adverseChart = null
+
     function loadAdverseEvents() {
+
         const productName = document.getElementById("eventInput").value.trim();
         const eventDiv = document.getElementById("eventResults");
+        const eventsChart = document.getElementById('chart');
 
         if (!productName) {
             eventDiv.innerHTML = "<p>Please enter a product name.</p>";
@@ -214,6 +218,35 @@
                         <h3>Top Reported Reactions for ${productName}</h3>
                         <ul>
                 `;
+
+                const xlab = reactions.map((item) =>item.term);
+                const ylab = reactions.map((item)=> item.count);
+                eventsChart.innerHTML = `<canvas id="eventsCanvas"></canvas>`;
+
+                const ctx = document.getElementById('eventsCanvas');
+
+                if(adverseChart){
+                    adverseChart.destroy();
+                }
+
+                 new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: xlab,
+                        datasets: [{
+                            label: `reported adverse events for ${productName}`,
+                            data: ylab,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
 
                 reactions.forEach((item) => {
                     output += `<li>${item.term}: ${item.count}</li>`;
@@ -340,5 +373,3 @@ function renderSearches(data) {
     }
 
     loadRecentSearches();
-
-    
