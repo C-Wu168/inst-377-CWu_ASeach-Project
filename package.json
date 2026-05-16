@@ -2,9 +2,9 @@
   "name": "inst-377-cwu_aseach-project",
   "version": "1.0.0",
   "description": "Double Check is a web application aimed to make it easier for users to undertand ingredients and drug information behind everday products to improve safety awareness. Many consumers struggle to identify what ingredients are harmful, leading to confusion, misinforamtion, and fear based assumptions about health and nutrition.",
-  "main": "proj_script.js",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon -e'*'",
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,6 +22,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.105.4",
     "body-parser": "^2.2.2",
+    "cursorly.js": "^1.0.5",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "node-fetch": "^2.7.0",
