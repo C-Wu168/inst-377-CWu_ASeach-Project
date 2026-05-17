@@ -18,5 +18,3 @@ This application is made to work on modern web browsers across various web brows
 - Firefox
 
 ## Developer Manual
-
-[insert Link]
