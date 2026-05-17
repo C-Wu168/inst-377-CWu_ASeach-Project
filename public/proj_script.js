@@ -191,7 +191,6 @@
     let adverseChart = null
 
     function loadAdverseEvents() {
-
         const productName = document.getElementById("eventInput").value.trim();
         const eventDiv = document.getElementById("eventResults");
         const eventsChart = document.getElementById('chart');
@@ -211,25 +210,23 @@
                 return response.json();
             })
             .then((data) => {
-                const reactions = data.results.slice(0, 10);
-
-                let output = `
-                    <div class="result-box">
-                        <h3>Top Reported Reactions for ${productName}</h3>
-                        <ul>
-                `;
-
-                const xlab = reactions.map((item) =>item.term);
-                const ylab = reactions.map((item)=> item.count);
-                eventsChart.innerHTML = `<canvas id="eventsCanvas"></canvas>`;
-
-                const ctx = document.getElementById('eventsCanvas');
-
-                if(adverseChart){
-                    adverseChart.destroy();
+                if (!data.results || data.results.length === 0) {
+                    eventDiv.innerHTML = `<p>No adverse events found for "<strong>${productName}</strong>". Try a different product name.</p>`;
+                    eventsChart.innerHTML = "";
+                    return;
                 }
 
-                 new Chart(ctx, {
+                const reactions = data.results.slice(0, 10);
+                const xlab = reactions.map((item) => item.term);
+                const ylab = reactions.map((item) => item.count);
+
+                eventsChart.innerHTML = `<canvas id="eventsCanvas"></canvas>`;
+                const ctx = document.getElementById('eventsCanvas');
+
+                if (adverseChart) {
+                    adverseChart.destroy();
+                }
+                adverseChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
                         labels: xlab,
@@ -240,22 +237,19 @@
                         }]
                     },
                     options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
+                        scales: { y: { beginAtZero: true } }
                     }
                 });
 
+                let output = `
+                    <div class="result-box">
+                        <h3>Top Reported Reactions for ${productName}</h3>
+                        <ul>
+                `;
                 reactions.forEach((item) => {
                     output += `<li>${item.term}: ${item.count}</li>`;
                 });
-
-                output += `
-                        </ul>
-                    </div>
-                `;
+                output += `</ul></div>`;
 
                 eventDiv.innerHTML = output;
             })
