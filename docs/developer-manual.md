@@ -44,6 +44,7 @@ POST : `/api/searches`, Saves searched drug into Supabase
 - Heavy use may hit openFDA'S request limit
 - Searching the same drug may create duplicate rows in the Supabase database
 - Potentially unable to search up certain drugs for Search and Adverse Events page
+    - if user has previously successfuly looked up a drug for the adverse events and seen the chart, previous chart will remain if new drug search fails to load.
 
 ## Roadmap
 - Add account and user authentication
