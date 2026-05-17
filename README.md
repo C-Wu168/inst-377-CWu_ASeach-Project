@@ -18,3 +18,5 @@ This application is made to work on modern web browsers across various web brows
 - Firefox
 
 ## Developer Manual
+click this link to go to the developer manual !
+https://github.com/C-Wu168/inst-377-CWu_ASeach-Project/blob/main/docs/developer-manual.md
